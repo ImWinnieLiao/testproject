@@ -35,8 +35,6 @@ class Page1 extends StatelessWidget {
             }
           }
         }
-        //_navigateToNextScreen(context);
-        //Navigator.of(context).push(_createRoute());
       },
     );
 
@@ -211,7 +209,9 @@ class BreakFastPage extends StatelessWidget {
     );
 
     final page = Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('早餐餐廳'),
+      ),
       body: widget,
     );
     return page;
@@ -276,7 +276,9 @@ class PastaPage extends StatelessWidget {
     );
 
     final page = Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('義大利麵餐廳'),
+      ),
       body: widget,
     );
     return page;
@@ -341,7 +343,9 @@ class RicePage extends StatelessWidget {
     );
 
     final page = Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('飯類餐廳'),
+      ),
       body: widget,
     );
     return page;
@@ -406,7 +410,9 @@ class DrinkPage extends StatelessWidget {
     );
 
     final page = Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('飲料選擇'),
+      ),
       body: widget,
     );
     return page;

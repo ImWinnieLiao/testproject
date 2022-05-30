@@ -17,14 +17,14 @@ class BreakFast1 extends StatelessWidget {
 
     //建立App操作畫面
     final previousBtn = FlatButton(
-      child: Icon(Icons.keyboard_arrow_left),
+      child: const Icon(Icons.keyboard_arrow_left),
       onPressed: () {
         imgBrowser.previousImage();
       },
     );
 
     final nextBtn = FlatButton(
-      child: Icon(Icons.keyboard_arrow_right),
+      child: const Icon(Icons.keyboard_arrow_right),
       onPressed: () {
         imgBrowser.previousImage();
       },
