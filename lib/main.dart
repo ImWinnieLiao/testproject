@@ -4,14 +4,14 @@ import 'package:testproject/breakfast2.dart';
 
 void main() {
   runApp(
-     MaterialApp(
+     const MaterialApp(
       home: Page1(),
     ),
   );
 }
 
 class Page1 extends StatelessWidget {
-  //const Page1({super.key});
+  const Page1({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,18 +44,18 @@ class Page1 extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
-            child: Text('吃飯種類:', style: TextStyle(fontSize: 20)),
-            margin: EdgeInsets.symmetric(vertical: 50,horizontal: 80),
+            margin: const EdgeInsets.symmetric(vertical: 50,horizontal: 80),
             alignment: Alignment.centerLeft,
+            child: const Text('吃飯種類:', style: TextStyle(fontSize: 20)),
           ),
           Container(
-            child: typeRadioGroup,
             width: 200,
-            margin: EdgeInsets.symmetric(vertical: 10),
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            child: typeRadioGroup,
           ),
           Container(
+            margin: const EdgeInsets.symmetric(vertical: 40),
             child: btn,
-            margin: EdgeInsets.symmetric(vertical: 40),
           ),
         ],
       ),
@@ -154,38 +154,10 @@ Route _createRoute1() {
 }
 
 class BreakFastPage extends StatelessWidget {
-  //const BreakFastPage({super.key});
+  const BreakFastPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
-    final textWrapper = _TextWrapper(GlobalKey<_TextWrapperState>());
-
-    const items = <String>['麥味登', '向陽', '兔寶寶'];
-    final List<IconData> icons = [Icons.restaurant,Icons.restaurant,Icons.restaurant,];
-
-    var listView = ListView.separated(
-      itemCount: items.length,
-      itemBuilder: (context, index) =>
-          Card(
-            child:ListTile(title: Text(items[index],style: TextStyle(fontSize: 20),),
-              onTap: () {
-                if(items[index] == '麥味登'){
-                  Navigator.of(context).push(_createRoute());
-                }else{
-                  if(items[index] == '向陽'){
-                    Navigator.of(context).push(_createRoute1());
-                  }
-                }
-              },
-              leading: Container(
-                child: Icon(icons[index]),
-                padding: EdgeInsets.symmetric(vertical: 8,horizontal: 5),),
-              subtitle: Text('項目說明',style: TextStyle(fontSize: 16),),),
-          ),
-
-      separatorBuilder: (BuildContext context, int index) => const Divider(),
-    );
 
     final btn = RaisedButton(
       child: Text('重新選擇餐點'),
@@ -193,15 +165,46 @@ class BreakFastPage extends StatelessWidget {
     );
 
     final widget = Container(
-      margin: EdgeInsets.symmetric(vertical: 10,),
+      margin: const EdgeInsets.symmetric(vertical: 10,),
       child: Column(
         children:  [
-          textWrapper,
-          Expanded(child: listView,),
+          Card(
+            child:ListTile(
+              title: const Text('麥味登'),
+              subtitle: const Text('大學城、水源街'),
+              leading: const Icon(Icons.restaurant),
+              trailing: const Icon(Icons.keyboard_arrow_right),
+              onTap: () {
+                Navigator.of(context).push(_createRoute());
+              },
+            ),
+          ),
+          Card(
+            child:ListTile(
+              title: const Text('向陽'),
+              subtitle: const Text('大學城'),
+              leading: const Icon(Icons.restaurant),
+              trailing: const Icon(Icons.keyboard_arrow_right),
+              onTap: () {
+                Navigator.of(context).push(_createRoute1());
+              },
+            ),
+          ),
+          Card(
+            child:ListTile(
+              title: const Text('兔寶寶'),
+              subtitle: const Text('水源街'),
+              leading: const Icon(Icons.restaurant),
+              trailing: const Icon(Icons.keyboard_arrow_right),
+              onTap: () {
+                Navigator.of(context).push(_createRoute1());
+              },
+            ),
+          ),
           Container(
-            child: btn,
             alignment: Alignment.bottomCenter,
-            padding: EdgeInsets.all(30),
+            padding: const EdgeInsets.all(30),
+            child: btn,
           ),
         ],
       ),
@@ -215,62 +218,11 @@ class BreakFastPage extends StatelessWidget {
   }
 }
 
-class _TextWrapper extends StatefulWidget {
-  final GlobalKey<_TextWrapperState> _key;
-
-  _TextWrapper(this._key): super (key: _key);
-
-  State<StatefulWidget> createState() => _TextWrapperState();
-
-  setText(String string) {
-    _key.currentState?.setText(string);
-  }
-}
-
-class _TextWrapperState extends State<_TextWrapper> {
-  String _str = '';
-
-  Widget build(BuildContext context) {
-    var widget = Text(
-      _str,
-      style:  TextStyle(fontSize: 20),
-    );
-
-    return widget;
-  }
-
-  setText(String string) {
-    setState(() {
-      _str = string;
-    });
-  }
-}
-
 class PastaPage extends StatelessWidget {
-  //const PastaPage({super.key});
+  const PastaPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
-    final textWrapper = _TextWrapper(GlobalKey<_TextWrapperState>());
-
-    const items = <String>['吃乎意料', 'Otto Pasta','Buona Pasta'];
-    final List<IconData> icons = [Icons.restaurant,Icons.restaurant,Icons.restaurant,];
-
-    var listView = ListView.separated(
-      itemCount: items.length,
-      itemBuilder: (context, index) =>
-          Card(
-            child:ListTile(title: Text(items[index],style: TextStyle(fontSize: 20),),
-              onTap: () => textWrapper.setText('點選'+items[index]),
-              leading: Container(
-                child: Icon(icons[index]),
-                padding: EdgeInsets.symmetric(vertical: 8,horizontal: 5),),
-              subtitle: Text('項目說明',style: TextStyle(fontSize: 16),),),
-          ),
-
-      separatorBuilder: (BuildContext context, int index) => const Divider(),
-    );
 
     final btn = RaisedButton(
       child: Text('回到上一頁'),
@@ -278,15 +230,46 @@ class PastaPage extends StatelessWidget {
     );
 
     final widget = Container(
-      margin: EdgeInsets.symmetric(vertical: 10,),
+      margin: const EdgeInsets.symmetric(vertical: 10,),
       child: Column(
         children:  [
-          textWrapper,
-          Expanded(child: listView,),
+          Card(
+            child:ListTile(
+              title: const Text('吃乎意料'),
+              subtitle: const Text('大學城'),
+              leading: const Icon(Icons.restaurant),
+              trailing: const Icon(Icons.keyboard_arrow_right),
+              onTap: () {
+                Navigator.of(context).push(_createRoute());
+              },
+            ),
+          ),
+          Card(
+            child:ListTile(
+              title: const Text('Otto Pasta'),
+              subtitle: const Text('金雞母'),
+              leading: const Icon(Icons.restaurant),
+              trailing: const Icon(Icons.keyboard_arrow_right),
+              onTap: () {
+                Navigator.of(context).push(_createRoute1());
+              },
+            ),
+          ),
+          Card(
+            child:ListTile(
+              title: const Text('Buona Pasta'),
+              subtitle: const Text('金雞母、水源街'),
+              leading: const Icon(Icons.restaurant),
+              trailing: const Icon(Icons.keyboard_arrow_right),
+              onTap: () {
+                Navigator.of(context).push(_createRoute1());
+              },
+            ),
+          ),
           Container(
-            child: btn,
             alignment: Alignment.bottomCenter,
-            padding: EdgeInsets.all(30),
+            padding: const EdgeInsets.all(30),
+            child: btn,
           ),
         ],
       ),
@@ -301,46 +284,57 @@ class PastaPage extends StatelessWidget {
 }
 
 class RicePage extends StatelessWidget {
-  //const RicePage({super.key});
+  const RicePage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
 
-    final textWrapper = _TextWrapper(GlobalKey<_TextWrapperState>());
-
-    const items = <String>['椒麻雞大王','樂之屋','極簡主義'];
-    final List<IconData> icons = [Icons.restaurant,Icons.restaurant, Icons.restaurant];
-
-    var listView = ListView.separated(
-      itemCount: items.length,
-      itemBuilder: (context, index) =>
-          Card(
-            child:ListTile(title: Text(items[index],style: TextStyle(fontSize: 20),),
-              onTap: () => textWrapper.setText('點選'+items[index]),
-              leading: Container(
-                child: Icon(icons[index]),
-                padding: EdgeInsets.symmetric(vertical: 8,horizontal: 5),),
-              subtitle: Text('項目說明',style: TextStyle(fontSize: 16),),),
-          ),
-
-      separatorBuilder: (BuildContext context, int index) => const Divider(),
-    );
-
     final btn = RaisedButton(
-      child: Text('回到上一頁'),
+      child: const Text('回到上一頁'),
       onPressed: ()=> Navigator.pop(context),
     );
 
     final widget = Container(
-      margin: EdgeInsets.symmetric(vertical: 10,),
+      margin: const EdgeInsets.symmetric(vertical: 10,),
       child: Column(
         children:  [
-          textWrapper,
-          Expanded(child: listView,),
+          Card(
+            child:ListTile(
+              title: const Text('醬飯屋'),
+              subtitle: const Text('大學城'),
+              leading: const Icon(Icons.restaurant),
+              trailing: const Icon(Icons.keyboard_arrow_right),
+              onTap: () {
+                Navigator.of(context).push(_createRoute());
+              },
+            ),
+          ),
+          Card(
+            child:ListTile(
+              title: const Text('珍饌廚房'),
+              subtitle: const Text('水源街'),
+              leading: const Icon(Icons.restaurant),
+              trailing: const Icon(Icons.keyboard_arrow_right),
+              onTap: () {
+                Navigator.of(context).push(_createRoute1());
+              },
+            ),
+          ),
+          Card(
+            child:ListTile(
+              title: const Text('樂之屋'),
+              subtitle: const Text('金雞母'),
+              leading: const Icon(Icons.restaurant),
+              trailing: const Icon(Icons.keyboard_arrow_right),
+              onTap: () {
+                Navigator.of(context).push(_createRoute1());
+              },
+            ),
+          ),
           Container(
-            child: btn,
             alignment: Alignment.bottomCenter,
-            padding: EdgeInsets.all(30),
+            padding: const EdgeInsets.all(30),
+            child: btn,
           ),
         ],
       ),
@@ -355,46 +349,57 @@ class RicePage extends StatelessWidget {
 }
 
 class DrinkPage extends StatelessWidget {
-  //const DrinkPage({super.key});
+  const DrinkPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
 
-    final textWrapper = _TextWrapper(GlobalKey<_TextWrapperState>());
-
-    const items = <String>['迷客夏','五十嵐','清心'];
-    final List<IconData> icons = [Icons.wine_bar, Icons.wine_bar,Icons.wine_bar];
-
-    var listView = ListView.separated(
-      itemCount: items.length,
-      itemBuilder: (context, index) =>
-          Card(
-            child:ListTile(title: Text(items[index],style: TextStyle(fontSize: 20),),
-              onTap: () => textWrapper.setText('點選'+items[index]),
-              leading: Container(
-                child: Icon(icons[index]),
-                padding: EdgeInsets.symmetric(vertical: 8,horizontal: 5),),
-              subtitle: Text('項目說明',style: TextStyle(fontSize: 16),),),
-          ),
-
-      separatorBuilder: (BuildContext context, int index) => const Divider(),
-    );
-
     final btn = RaisedButton(
-      child: Text('回到上一頁'),
+      child: const Text('回到上一頁'),
       onPressed: ()=> Navigator.pop(context),
     );
 
     final widget = Container(
-      margin: EdgeInsets.symmetric(vertical: 10,),
+      margin: const EdgeInsets.symmetric(vertical: 10,),
       child: Column(
         children:  [
-          textWrapper,
-          Expanded(child: listView,),
+          Card(
+            child:ListTile(
+              title: const Text('迷客夏'),
+              subtitle: const Text('大學城'),
+              leading: const Icon(Icons.restaurant),
+              trailing: const Icon(Icons.keyboard_arrow_right),
+              onTap: () {
+                Navigator.of(context).push(_createRoute());
+              },
+            ),
+          ),
+          Card(
+            child:ListTile(
+              title: const Text('五十嵐'),
+              subtitle: const Text('大學城'),
+              leading: const Icon(Icons.restaurant),
+              trailing: const Icon(Icons.keyboard_arrow_right),
+              onTap: () {
+                Navigator.of(context).push(_createRoute1());
+              },
+            ),
+          ),
+          Card(
+            child:ListTile(
+              title: const Text('清心'),
+              subtitle: const Text('水源街'),
+              leading: const Icon(Icons.restaurant),
+              trailing: const Icon(Icons.keyboard_arrow_right),
+              onTap: () {
+                Navigator.of(context).push(_createRoute1());
+              },
+            ),
+          ),
           Container(
-            child: btn,
             alignment: Alignment.bottomCenter,
-            padding: EdgeInsets.all(30),
+            padding: const EdgeInsets.all(30),
+            child: btn,
           ),
         ],
       ),
